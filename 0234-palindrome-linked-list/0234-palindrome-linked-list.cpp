@@ -11,35 +11,51 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if(head==NULL || head->next==NULL) return head;
-        ListNode* dummy=NULL;
-        ListNode* ptr=head;
-        while(ptr!=NULL){
-            ListNode*temp=new ListNode(ptr->val);
-            temp->next=dummy;
-            dummy=temp;
-            ptr=ptr->next;
-        }
+        // if(head==NULL || head->next==NULL) return head;
+        // ListNode* dummy=NULL;
+        // ListNode* ptr=head;
+        // while(ptr!=NULL){
+        //     ListNode*temp=new ListNode(ptr->val);
+        //     temp->next=dummy;
+        //     dummy=temp;
+        //     ptr=ptr->next;
+        // }
+        // ListNode* temp2=dummy;
+        // ListNode* temp=dummy;
+        // while(temp!=NULL){
+        //     cout<<temp->val;
+        //     temp=temp->next;
+        // }
+        // ListNode* temp1=head;
+        // temp2=dummy;
+        // bool check=true;
+        // while(temp1!=NULL && temp2!=NULL){
+        //     if(temp1->val != temp2->val){
+        //         check=false;
+        //         break;
+        //     }
+        //     temp1=temp1->next;
+        //     temp2=temp2->next;
+        // }
+        // return check;
 
-        ListNode* temp2=dummy;
-        ListNode* temp=dummy;
+        if(head==NULL || head->next==NULL) return head;
+        stack<int>st;
+        ListNode* temp=head;
         while(temp!=NULL){
-            cout<<temp->val;
+            st.push(temp->val);
             temp=temp->next;
         }
-
-        ListNode* temp1=head;
-        temp2=dummy;
-        bool check=true;
-        while(temp1!=NULL && temp2!=NULL){
-            if(temp1->val != temp2->val){
-                check=false;
-                break;
+        temp=head;
+        while(!st.empty()){
+            int i=st.top();
+            st.pop();
+            if(i!=temp->val){
+                return false;
             }
-            temp1=temp1->next;
-            temp2=temp2->next;
+            temp=temp->next;
         }
-        return check;
+        return true;
 
     }
 };
