@@ -13,14 +13,15 @@ class Solution {
 public:
 
     bool check(TreeNode* l,TreeNode* r){
-        if(!l && ! r) return true;
-        if(!l || !r) return false;  // iska mtlb koi ek null hai aur dusra nahi hai
-        if((l->val==r->val) && check(l->left,r->right) && check(l->right,r->left)) return true;
-        return false;
+       if(l==NULL && r==NULL) return true;
+       if(l==NULL || r==NULL) return false;
+       if(l->val==r->val&& check(l->right,r->left)&& check(l->left, r->right)){
+           return true;
+       }
+       return false;
     }
 
     bool isSymmetric(TreeNode* root) {
-        if(!root) return true;
         return check(root->left,root->right);
     }
 };
