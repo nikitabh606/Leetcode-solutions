@@ -11,17 +11,19 @@
  */
 class Solution {
 public:
-    int inorder(TreeNode* root, int& prevElement, int& ans){
-        if(root->left) inorder(root->left, prevElement, ans);
-        if(prevElement >=0 ) ans = min(ans, abs(prevElement-root->val));
-        prevElement = root->val;
-        if(root->right) inorder(root->right, prevElement, ans);
-        return ans;      
+    int inorder(TreeNode* root, int& prev, int& ans){
+            if(!root) return 0;
+            inorder(root->left,prev,ans);
+            if(prev!=-1) ans=min(ans,abs(root->val-prev));
+            prev=root->val;
+            
+            inorder(root->right,prev,ans);
+            return ans;
     }
     int getMinimumDifference(TreeNode* root){
-        int prevElement = -1;
+        int prev=-1;
         int ans = INT_MAX;
-        return inorder(root, prevElement, ans);
+        return inorder(root, prev, ans);
      
     }
 };
