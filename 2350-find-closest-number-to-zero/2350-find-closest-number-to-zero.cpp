@@ -1,20 +1,19 @@
 class Solution {
 public:
     int findClosestNumber(vector<int>& nums) {
-        unordered_set<int> s;
-        for(int it : nums){
-            s.insert(it);
+        int mini=INT_MAX;
+        unordered_map<int,int>mp;
+        for(auto it:nums){
+            int x=abs(it-0);
+            mp[it]=x;
+            mini=min(mini,x);
         }
-        int mini =INT_MAX;
-        for(int it:nums){
-            if(abs(mini) >= abs(it))
-                 mini = it;
+        for(auto it:mp){
+            if(it.second==mini){
+                if(mp.count(abs(mini)))return abs(it.first);
+                return it.first;
+            }
         }
-        
-        if(s.count(abs(mini))){
-            return abs(mini);
-        }
-        
-        return mini;
+        return -1;
     }
 };
