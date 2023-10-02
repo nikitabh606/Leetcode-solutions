@@ -2,17 +2,17 @@ class Solution {
 public:
     int findClosestNumber(vector<int>& nums) {
         int mini=INT_MAX;
-        unordered_map<int,int>mp;
+        unordered_map<int,int>mp; 
         for(auto it:nums){
-            mp[it]=abs(it);
-            mini=min(mini,abs(it));
+            mp[it]=abs(it); 
+            mini=min(mini,abs(it)); // for finding minimum positive element
         }
         for(auto it:mp){
             if(it.second==mini){
-                if(mp.count(abs(mini)))return abs(it.first);
+                if(mp.count(abs(mini))) return abs(it.first);
                 return it.first;
             }
         }
-        return -1;
+        return -1; // just for the sake of returning something
     }
 };
