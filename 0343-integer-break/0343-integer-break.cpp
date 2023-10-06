@@ -1,21 +1,19 @@
 class Solution {
-private:
-    int solve(int n,vector<int>& dp){
-        if(n==0 || n==1) return 1;
-        
-        if(dp[n]!=-1) return dp[n];
-        
-        int maxi=0;
-        
-        for(int ind=1;ind<n;ind++){
-            int temp=max(ind*(n-ind), ind * solve(n-ind,dp));
-            maxi=max(maxi,temp);
-        }
-        return dp[n]=maxi;
-    }
 public:
+    int fun(vector<int> &v, int sum, int n, vector<vector<int>> &dp){
+        if(sum==0 || n==0) return 1;
+        if(dp[n][sum] != -1) return dp[n][sum];
+        if(v[n-1]<=sum){
+            int one = v[n-1] * fun(v, sum - v[n-1], n, dp);
+            int two = fun(v, sum, n-1, dp);
+            return dp[n][sum]= max(one,two);
+        }
+        return dp[n][sum]= fun(v, sum, n-1, dp);
+    }
     int integerBreak(int n) {
-        vector<int> dp(n+1,-1);
-        return solve(n,dp);
+        vector<int> v;
+        for(int i=1; i<n; i++) v.push_back(i);
+        vector<vector<int>> dp(n, vector<int>(n+1, -1));
+        return fun(v, n, v.size(), dp);
     }
 };
