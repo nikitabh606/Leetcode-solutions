@@ -33,7 +33,7 @@ public:
         else if(s.size()>1)
         {
             v[0]=*s.begin();
-            v[1]=*s.crbegin();
+            v[1]=*s.rbegin();
         }
         // for(auto it: s) cout<< it<<" ";
         return v;
