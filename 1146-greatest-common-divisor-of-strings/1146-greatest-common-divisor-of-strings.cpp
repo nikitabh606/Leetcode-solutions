@@ -7,8 +7,6 @@ public:
         if (str1 + str2 != str2 + str1) {
             return "";
         }
-
-        int gcd_len = __gcd(len1, len2);
-        return str1.substr(0, gcd_len);
+        return str1.substr(0, __gcd(len1, len2));
     }
 };
